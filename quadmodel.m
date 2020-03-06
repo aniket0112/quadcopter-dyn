@@ -26,5 +26,5 @@ function [tsol,ysol] = quadmodel(t,x0,U,ixx,iyy,izz,m,l,tu)
         dX(10) = u*cos(theta)*cos(psi)+v*(-cos(phi)*sin(psi)+sin(phi)*sin(theta)*cos(psi))+w*(sin(phi)*sin(psi)+cos(phi)*sin(theta)*cos(psi));
         dX(11) = u*cos(theta)*sin(psi)+v*(cos(phi)*cos(psi)+sin(phi)*sin(theta)*sin(psi))+w*(-sin(phi)*cos(psi)+cos(phi)*sin(theta)*sin(psi));
         dX(12) = -u*sin(theta)+v*sin(phi)*cos(theta)+w*cos(phi)*cos(theta);
-    end
+   end
 end

@@ -19,10 +19,10 @@ attitude.yaw = atan(tan(cast(attitude.yaw,'double')));
 %esc duty cycle log to thrust
 motorMsg = readmsg(tlogread,'MessageName','SERVO_OUTPUT_RAW');
 motor = motorMsg.Messages{1};
-u1 = smoothdata((cast(motor.servo1_raw,'double') - 1000)*DUTYCYCLE2RADS);
-u2 = smoothdata((cast(motor.servo2_raw,'double') - 1000)*DUTYCYCLE2RADS);
-u3 = smoothdata((cast(motor.servo3_raw,'double') - 1000)*DUTYCYCLE2RADS);
-u4 = smoothdata((cast(motor.servo4_raw,'double') - 1000)*DUTYCYCLE2RADS);
+u1 = (cast(motor.servo1_raw,'double') - 1000)*DUTYCYCLE2RADS;
+u2 = (cast(motor.servo2_raw,'double') - 1000)*DUTYCYCLE2RADS;
+u3 = (cast(motor.servo3_raw,'double') - 1000)*DUTYCYCLE2RADS;
+u4 = (cast(motor.servo4_raw,'double') - 1000)*DUTYCYCLE2RADS;
 
 t1 = -k*u1.^2;
 t2 = -k*u2.^2;
