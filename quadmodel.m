@@ -5,6 +5,8 @@ function [tsol,ysol] = quadmodel(t,x0,U,ixx,iyy,izz,l,m,tu)
     [tsol,ysol] = ode45(@odefun,t,x0);
     function dX = odefun(t,X)
         dX = zeros(12,1);
+        u = X(1); v = X(2); w = X(3); phi = X(4); theta = X(5); psi = X(6); p = X(7); q = X(8); r = X(9); x = X(10); y = X(11); z = X(12);
+        
         t1 = interp1(tu,U(:,1),t); 
         t2 = interp1(tu,U(:,2),t); 
         t3 = interp1(tu,U(:,3),t); 
@@ -13,7 +15,7 @@ function [tsol,ysol] = quadmodel(t,x0,U,ixx,iyy,izz,l,m,tu)
         tau2 = interp1(tu,U(:,6),t); 
         tau3 = interp1(tu,U(:,7),t); 
         tau4 = interp1(tu,U(:,8),t);
-        u = X(1); v = X(2); w = X(3); phi = X(4); theta = X(5); psi = X(6); p = X(7); q = X(8); r = X(9); x = X(10); y = X(11); z = X(12);
+        
         dX(1) = r*v-q*w-g*sin(theta);
         dX(2) = -r*u+p*w+g*sin(phi)*cos(theta);
         dX(3) = q*u-p*v+g*cos(phi)*cos(theta)+(t1+t2+t3+t4)/m;
