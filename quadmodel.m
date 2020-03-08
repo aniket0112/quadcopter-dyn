@@ -1,6 +1,6 @@
 % X = [u; v; w; phi; theta; psi; p; q; r; x; y; z]
 % T4->t1 T2->t2 T1->t3 T3->t4
-function [tsol,ysol] = quadmodel(t,x0,U,ixx,iyy,izz,m,l,tu)
+function [tsol,ysol] = quadmodel(t,x0,U,ixx,iyy,izz,l,m,tu)
     g = 9.8;
     [tsol,ysol] = ode45(@odefun,t,x0);
     function dX = odefun(t,X)

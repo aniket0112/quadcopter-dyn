@@ -1,0 +1,35 @@
+m = 2.6;
+k = 2.8e-5;
+b = 5e-7;
+nominal_rps = 500;
+l = 0.2;
+ixx = 3.63;
+iyy = 3.25;
+izz = 5.51;
+A = [0 0 1 0 0 0 0;
+     0 0 0 1 0 0 0;
+     0 0 0 0 0 0 0;
+     0 0 0 0 0 0 0;
+     0 0 0 0 0 0 0;
+     -1 0 0 0 0 0 0;
+     0 -1 0 0 0 0 0;];
+ B = [ 0 0 0 0;
+       0 0 0 0;
+      -2*k*l*nominal_rps/ixx -2*k*l*nominal_rps/ixx 2*k*l*nominal_rps/ixx  2*k*l*nominal_rps/ixx;
+      -2*k*l*nominal_rps/iyy  2*k*l*nominal_rps/iyy 2*k*l*nominal_rps/iyy -2*k*l*nominal_rps/iyy;
+       2*b*l*nominal_rps/izz -2*b*l*nominal_rps/izz 2*b*l*nominal_rps/izz -2*b*l*nominal_rps/izz;
+       0 0 0 0;
+       0 0 0 0];
+ Q = diag([1.4e-7,1.4e-7,1e-3,1e-3,1,0.9e5,0.9e5]);
+ R = diag([1.33 1.33 1.33 1.33]);
+ K = lqr(A,B,Q,R);
+ [tsol,ysol] = quadmodel_control([0:0.1:60],[0.1523,0.035,0,deg2rad(20),deg2rad(20),0,deg2rad(-4),deg2rad(-4),0,0,0],ixx,iyy,izz,l,k,b,m,nominal_rps,K);
+ x = [ysol(:,4),ysol(:,5),ysol(:,7),ysol(:,8),ysol(:,9),ysol(:,10),ysol(:,11)];
+ rps = (nominal_rps-(K*x')');
+ t = -k*rps.^2;
+ tau = b*rps.^2;
+ U = [t,tau];
+% [tsol_n,ysol_n] = quadmodel([0:0.1:60],[0.1523,0.035,0,deg2rad(20),deg2rad(20),0,deg2rad(-4),deg2rad(-4),0,0,0,0.3045],U,...
+%                             ixx,iyy,izz,m,l,tsol);
+[tsol_l,ysol_l] = quadmodel_linear([0:0.1:60],[0.1523,0.035,0,deg2rad(20),deg2rad(20),0,deg2rad(-4),deg2rad(-4),0],...
+                             ixx,iyy,izz,l,m,U,tsol);
