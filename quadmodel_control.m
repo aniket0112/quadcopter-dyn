@@ -9,17 +9,16 @@ function [tsol,ysol] = quadmodel_control(t,x0,ixx,iyy,izz,l,k,b,m,nominal_t,K)
         phi = X(4); theta = X(5); psi = X(6); p = X(7); q = X(8); r = X(9); ephi = X(10); etheta = X(11);
         X_ = [phi;theta;p;q;r;ephi;etheta];
         T = nominal_t - K*X_;
-        t1 = T(1);
         
-        dX(1) = r*v-q*w-g*sin(theta);
-        dX(2) = -r*u+p*w+g*sin(phi)*cos(theta);
-        dX(3) = q*u-p*v+g*cos(phi)*cos(theta)+(t1+t2+t3+t4)/m;
-        dX(4) = p+tan(theta)*(q*sin(phi)+r*cos(phi));
-        dX(5) = q*cos(phi)-r*sin(phi);
-        dX(6) = (q*sin(phi)+r*cos(phi))/cos(theta);
-        dX(7) = q*r*(iyy-izz)/ixx+l*(t1+t2-t3-t4)/ixx;
-        dX(8) = p*r*(izz-ixx)/iyy+l*(t1-t2-t3+t4)/iyy;
-        dX(9) = p*q*(ixx-iyy)/izz+(tau1-tau2+tau3-tau4)/izz;
+        dX(1) = -g*theta;
+        dX(2) = g*phi;
+        dX(3) = (T(1)+T(2)+T(3)+T(4))/m;
+        dX(4) = p;
+        dX(5) = q;
+        dX(6) = r;
+        dX(7) = l*(T(1)+T(2)-T(3)-T(4))/ixx;
+        dX(8) = l*(T(1)-T(2)-T(3)+T(4))/iyy;
+        dX(9) = -b/k*(T(1)-T(2)+T(3)-T(4))/izz;
         dX(10) = -phi;
         dX(11) = -theta;
     end
