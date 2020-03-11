@@ -1,10 +1,7 @@
 m = 1.02;
-ixx = 2;
-iyy = 2;
-izz = 4;
-% ixx = 1.0446e-2;
-% iyy = 1.0714e-2;
-% izz = 1.3858e-2;
+ixx = 1.0446e-2;
+iyy = 1.0714e-2;
+izz = 1.3858e-2;
 l = 0.22;
 dt = 0.1;
 
@@ -27,6 +24,6 @@ tu = [tu_(1):dt:tu_(end)+1];
 %     zeros(length(tu),1)];
 
 x0 = [0;0;0;0;0;0;0;0;0;0;0;-0.1];
-[tsol,ysol] = quadmodel(tu,x0,U,ixx,iyy,izz,m,l,tu);
+%[tsol,ysol] = quadmodel(tu,x0,U,ixx,iyy,izz,m,l,tu);
 %plot(U(:,1)); hold on; plot(U(:,2)); plot(U(:,3)); plot(U(:,4));
 %plot(-ysol(:,12))
