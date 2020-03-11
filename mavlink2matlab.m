@@ -15,6 +15,7 @@ tlogread = mavlinktlog('fdata.tlog');
 attitudeMsg = readmsg(tlogread,'MessageName','ATTITUDE');
 attitude = attitudeMsg.Messages{1};
 attitude.yaw = atan(tan(cast(attitude.yaw,'double')));
+attitude.yawspeed = atan(tan(cast(attitude.yawspeed,'double')));
 
 %esc duty cycle log to thrust
 motorMsg = readmsg(tlogread,'MessageName','SERVO_OUTPUT_RAW');
