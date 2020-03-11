@@ -1,0 +1,25 @@
+tu = t(tstart:tend)-t(tstart);
+Fs = length(tu)/tu(end);
+f = (-length(tu)/2:length(tu)/2-1)*Fs/length(tu);
+y3 = fftshift(fft(log_t3(tstart:tend)));
+y2 = fftshift(fft(log_t2(tstart:tend)));
+y4 = fftshift(fft(log_t4(tstart:tend)));
+y1 = fftshift(fft(log_t1(tstart:tend)));
+subplot(2,2,1);
+plot(f,abs(y1));
+title('y1');
+subplot(2,2,2);
+plot(f,abs(y2));
+title('y2');
+subplot(2,2,3);
+plot(f,abs(y3));
+title('y3');
+subplot(2,2,4);
+plot(f,abs(y4));
+title('y4');
+
+k1 = abs(y1).*(abs(f)<0.05)';
+k2 = abs(y2).*(abs(f)<0.05)';
+k3 = abs(y3).*(abs(f)<0.05)';
+k4 = abs(y4).*(abs(f)<0.05)';
+

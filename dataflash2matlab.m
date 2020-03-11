@@ -26,5 +26,15 @@ log_tau4 = b*u4.^2;
 lat = log.AHR2.Lat;
 lng = log.AHR2.Lng;
 alt = log.AHR2.Alt;
+vx = log.NKF1.VN;
+vy = log.NKF1.VE;
+vz = log.NKF1.VD;
 
+roll = log.AHR2.Roll*pi/180;
+pitch = log.AHR2.Pitch*pi/180;
+yaw = log.AHR2.Yaw*pi/180;
+
+p = log.RATE.R*pi/180;
+q = log.RATE.P*pi/180;
+r = log.RATE.Y*pi/180;
 
