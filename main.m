@@ -35,7 +35,7 @@ fc_t = 0.1;
 fc_tau = 0.1;
 [u1,u2,u3,u4] = fft_filter(tu,fc_t,log_t3(tstart:tend),log_t2(tstart:tend),log_t4(tstart:tend),log_t1(tstart:tend));
 [tau1,tau2,tau3,tau4] = fft_filter(tu,fc_tau,log_tau3(tstart:tend),log_tau2(tstart:tend),log_tau4(tstart:tend),log_tau1(tstart:tend));
-U = [u3,u2,u4,u1+2,tau3,tau2,tau4,tau1];
+U = [u3,u2,u4,u1,tau3,tau2,tau4,tau1];
 x0 = [vx(tstart);vy(tstart);vz(tstart);
       roll(tstart);pitch(tstart);yaw(tstart);
       p(tstart);q(tstart);r(tstart);
